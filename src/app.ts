@@ -109,3 +109,41 @@ const numberStorage = new DataStorage<number>();
 // objStorage.addItem({ name: 'Doug' });
 // objStorage.removeItem(coryObj);
 // console.log(objStorage.getItems());
+
+// Generic Utility Types
+
+// Partial Type
+
+// Partial essentially sets all of our properties to be optional.  Similar to doing {title?: string} etc...
+
+// This is useful incase you want your object properties to be TEMPORARILY optional.
+interface CourseGoal {
+  title: string;
+  description: string;
+  completeUntil: Date;
+}
+
+function createCourseGoal(
+  title: string,
+  description: string,
+  date: Date
+): CourseGoal {
+  let courseGoal: Partial<CourseGoal> = {};
+  courseGoal.title = title;
+  courseGoal.description = description;
+  courseGoal.completeUntil = date;
+  return courseGoal as CourseGoal;
+}
+
+// readonly
+
+// set Readonly<other parameter> on anything you want to be immutable so that you are not allowed to change, remove or add properties.
+
+const names: Readonly<string[]> = ['Cory', 'Jane'];
+// names.push('Doug');
+// names.pop();
+
+// For more utility types :
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/assign
+
+// Generic Types vs Union Types
