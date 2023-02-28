@@ -74,32 +74,32 @@ function extractAndConvert<T extends object, U extends keyof T>(
 
 // Generic Classes
 
-class DataStorage<T extends string | number | boolean> {
-  private data: T[] = [];
+// class DataStorage<T extends string | number | boolean> {
+//   private data: T[] = [];
 
-  addItem(item: T) {
-    this.data.push(item);
-  }
+//   addItem(item: T) {
+//     this.data.push(item);
+//   }
 
-  removeItem(item: T) {
-    if (this.data.indexOf(item) === -1) {
-      return;
-    }
-    this.data.splice(this.data.indexOf(item), 1);
-  }
+//   removeItem(item: T) {
+//     if (this.data.indexOf(item) === -1) {
+//       return;
+//     }
+//     this.data.splice(this.data.indexOf(item), 1);
+//   }
 
-  getItems() {
-    return [...this.data];
-  }
-}
+//   getItems() {
+//     return [...this.data];
+//   }
+// }
 
-const textStorage = new DataStorage<string>();
-textStorage.addItem('Cory');
-textStorage.addItem('Doug');
-textStorage.removeItem('Cory');
-console.log(textStorage.getItems());
+// const textStorage = new DataStorage<string>();
+// textStorage.addItem('Cory');
+// textStorage.addItem('Doug');
+// textStorage.removeItem('Cory');
+// console.log(textStorage.getItems());
 
-const numberStorage = new DataStorage<number>();
+// const numberStorage = new DataStorage<number>();
 
 // const objStorage = new DataStorage<object>();
 
@@ -147,3 +147,32 @@ const names: Readonly<string[]> = ['Cory', 'Jane'];
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/assign
 
 // Generic Types vs Union Types
+
+class DataStorage<T extends string | number | boolean> {
+  private data: T[] = [];
+
+  addItem(item: T) {
+    this.data.push(item);
+  }
+
+  removeItem(item: T) {
+    if (this.data.indexOf(item) === -1) {
+      return;
+    }
+    this.data.splice(this.data.indexOf(item), 1);
+  }
+
+  getItems() {
+    return [...this.data];
+  }
+}
+
+const textStorage = new DataStorage<string>();
+textStorage.addItem('Cory');
+// textStorage.addItem(10);
+textStorage.removeItem('Cory');
+console.log(textStorage.getItems());
+
+const numberStorage = new DataStorage<number>();
+
+// The difference between union types and generic types, is that if you were to just set the above example as union types, it would allow you to mix the various types of data.  In this situation our arrays are strings. We want DataStorage to be able to handle numbers, string and booleans, but each instantiation needs to be of a specific type.  If we typed DataStorage with union types it would allow us to mix types.  Using generic types we constrain it to only being able to use string, number and boolean, but each instantiation will be of either one or the other.
